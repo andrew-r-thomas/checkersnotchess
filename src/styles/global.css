@@ -1,0 +1,25 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@font-face {
+	font-family: 'Inconsolata';
+	src: url('fonts/Inconsolata/Inconsolata-VariableFont_wdth,wght.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Merriweather';
+	src: url('fonts/Merriweather/Merriweather-VariableFont_opsz,wdth,wght.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	src: url('fonts/Open_Sans/OpenSans-VariableFont_wdth,wght.ttf') format('truetype');
+}
+
+@theme {
+	--color-bg: #eee8d5;
+	--color-fg: #073642;
+	--font-mono: 'Inconsolata', 'monospaced';
+	--font-serif: 'Merriweather', 'serif';
+	--font-sans: 'Open Sans', 'sans-serif';
+}

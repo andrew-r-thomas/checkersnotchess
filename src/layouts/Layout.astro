@@ -1,0 +1,44 @@
+---
+import "../styles/global.css";
+import { getCollection } from "astro:content";
+const posts = await getCollection("posts", ({ data })=>{
+	return data.title !== "Welcome";
+});
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<meta name="generator" content={Astro.generator} />
+		<title>(checkers not chess)</title>
+	</head>
+	<body class="w-screen h-screen bg-bg text-fg font-sans">
+		<main class="flex flex-row w-full h-full">
+			<div class="border-r-4 border-fg w-1/6 flex flex-col space-y-8">
+				<div class="p-8 w-full flex flex-col space-y-8">
+					<a href="/" class="flex flex-col space-y-2 justify-center w-full">
+						<span class="text-6xl">⦿¬♜</span>
+						<span class="font-mono font-bold">(checkers not chess)</span>
+					</a>
+					<div class="flex flex-col">
+						<span class="border-l-4 border-fg p-2">
+							Solving problems you probably don’t have creates more problems you definitely do.
+						</span>
+						<span class="font-bold font-serif">- Mike Acton</span>
+					</div>
+				</div>
+				<ol class="w-full h-full flex flex-col border-t-4 border-fg">
+					{posts.map(post => (
+					<li class="border-b-4 border-fg"><a class="font-serif" href={`/${post.id}`}>{post.data.title}</a></li>
+					))}
+				</ol>
+			</div>
+			<article class="p-8 prose">
+				<slot/>
+			</article>
+		</main>
+	</body>
+</html>
