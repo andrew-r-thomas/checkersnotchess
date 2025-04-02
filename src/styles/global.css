@@ -17,8 +17,10 @@
 }
 
 @theme {
+	/* --color-bg: #073642; */
+	--color-fg: #002b36;
+	/* --color-fg: #586e75; */
 	--color-bg: #eee8d5;
-	--color-fg: #073642;
 	--font-mono: 'Inconsolata', 'monospaced';
 	--font-serif: 'Merriweather', 'serif';
 	--font-sans: 'Open Sans', 'sans-serif';
