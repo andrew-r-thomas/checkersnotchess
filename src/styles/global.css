@@ -1,6 +1,11 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+@plugin "tailwind-scrollbar" {
+	nocompatible: true;
+	preferredStrategy: 'pseudoelements';
+}
+
 @font-face {
 	font-family: 'Inconsolata';
 	src: url('fonts/Inconsolata/Inconsolata-VariableFont_wdth,wght.ttf') format('truetype');
@@ -21,6 +26,9 @@
 	--color-fg: #002b36;
 	/* --color-fg: #586e75; */
 	--color-bg: #eee8d5;
+	--color-base1: #93a1a1;
+	--color-orange: #cb4b16;
+	--color-cyan: #2aa198;
 	--font-mono: 'Inconsolata', 'monospaced';
 	--font-serif: 'Merriweather', 'serif';
 	--font-sans: 'Open Sans', 'sans-serif';

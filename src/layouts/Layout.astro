@@ -26,7 +26,7 @@ const path = Astro.url.pathname;
 	</head>
 	<body class="w-screen h-screen bg-bg text-fg font-sans">
 		<main class="flex flex-row w-full h-full border-green-500">
-			<div class="border-r-4 border-fg w-1/6 flex flex-col space-y-8">
+			<div class="border-r-6 border-fg w-1/6 flex flex-col space-y-8">
 				<div class="p-8 w-full flex flex-col space-y-8">
 					<a href="/" class="flex flex-col space-y-2 justify-center w-full">
 						<span class="text-6xl">⦿¬♜</span>
@@ -45,17 +45,18 @@ const path = Astro.url.pathname;
 							console.log(post.id);
 							return (
 							<li class={
-						`border-b-4 border-fg ${`/${post.id}` === path ? "bg-fg text-bg" : ""} flex`
+						`border-b-4 border-fg ${`/${post.id}` === path ? "bg-orange text-bg" : "hover:bg-fg hover:text-bg"} flex`
 							}>
 						<a class="font-serif font-bold text-xl p-4 w-full h-full" href={`/${post.id}`}>{post.data.title}</a>
 							</li>
 					)})}
 				</ol>
 			</div>
-			<div class="p-8 border-red-500 flex flex-col">
-				<article class="prose-xl prose-headings:font-serif prose-headings:text-fg prose-headings:font-bold text-fg text-sans">
-					<slot/>
-				</article>
+			<div class="p-8 border-red-500 flex flex-col overflow-y-scroll w-2/3 scrollbar scrollbar-w-2 scrollbar-thumb-orange scrollbar-track-fg">
+				<slot/>
+			</div>
+			<div class="w-1/6">
+				some other stuff will go here
 			</div>
 		</main>
 	</body>
