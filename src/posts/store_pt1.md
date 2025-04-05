@@ -16,7 +16,7 @@ An important distinction to make at the start is that we're gonna be targeting O
 
 I also want to point out that this is a pretty general purpose system. Databases are already inherently general purpose, and we're making a *library* for a DB subsystem, so it has to be even more general purpose. This means for handling things like read heavy vs write heavy workloads, we want these to be tunable knobs as much as possible, rather than embedded in the underlying structure of the system. To be clear, there's absolutely a benefit to specializing, and databases will often be specialized somewhat to specific use cases, but at a certain point, it stops being a database and becomes "the system you built for your application to manage it's persistent data". Again, this is *not necessarily a bad idea*, but it's not a database.
 
-> <u><strong>A Brief Aside On Language Choice</strong></u>
+> <u><strong>A Brief Aside On Language Choice</strong></u><br>
 > I'm writing this in rust, **the main reason for this choice is that it's just the language I have the most experience with.** I'll just leave it at that.
 
 ## about that index structure
