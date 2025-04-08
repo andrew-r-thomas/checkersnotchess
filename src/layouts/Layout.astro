@@ -1,15 +1,17 @@
 ---
+import Nav from "../components/Nav";
 import "../styles/global.css";
 import { getCollection } from "astro:content";
-const posts = await getCollection("posts", ({ data })=>{
-	return data.title !== "Welcome";
+
+const posts = await getCollection("posts", ({ data }) => {
+  return data.title !== "Welcome";
 });
 posts.sort((a, b) => {
-	if (a.data.date > b.data.date) {
-		return -1;
-} else {
-	return 1;
-}
+  if (a.data.date > b.data.date) {
+    return -1;
+  } else {
+    return 1;
+  }
 });
 
 const path = Astro.url.pathname;
@@ -17,46 +19,22 @@ const path = Astro.url.pathname;
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>(checkers not chess)</title>
-	</head>
-	<body class="w-screen h-screen bg-bg text-fg font-sans">
-		<main class="flex flex-col-reverse md:flex-row w-full h-full border-green-500">
-			<div class="border-r-8 border-fg md:w-1/6 flex flex-col space-y-8">
-				<div class="p-8 w-full flex flex-col space-y-8">
-					<a href="/" class="flex flex-col space-y-2 justify-center w-full">
-						<span class="text-6xl"><span class="text-orange">⦿</span>¬<span class="text-cyan">♜</span></span>
-						<span class="font-mono font-bold">(<span class="text-orange">checkers</span> not <span class="text-cyan">chess</span>)</span>
-					</a>
-					<div class="flex flex-col">
-						<span class="border-l-4 border-fg p-2">
-							Solving problems you probably don’t have creates more problems you definitely do.
-						</span>
-						<span class="font-bold font-serif">- Mike Acton</span>
-					</div>
-				</div>
-				<ol class="w-full h-full flex flex-col border-t-4 border-fg">
-					{
-						posts.map(post => {
-							console.log(post.id);
-							return (
-							<li class={
-						`border-b-4 border-fg ${`/${post.id}` === path ? "bg-orange text-bg" : "hover:bg-fg hover:text-bg"} flex`
-							}>
-						<a class="font-serif font-bold text-xl p-4 w-full h-full" href={`/${post.id}`}>{post.data.title}</a>
-							</li>
-					)})}
-				</ol>
-			</div>
-			<div class="p-8 border-red-500 flex flex-col overflow-y-scroll md:w-1/2 scrollbar scrollbar-w-[8px] scrollbar-thumb-orange scrollbar-track-fg prose-pre:rounded-none prose-code:bg-fg prose-code:text-bg prose-code:rounded-sm prose-code:px-2">
-				<slot/>
-			</div>
-			<div class="w-full md:w-1/6">
-			</div>
-		</main>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>(checkers not chess)</title>
+  </head>
+  <body class="w-screen h-screen bg-bg text-fg font-sans">
+    <main class="flex flex-col md:flex-row w-full h-full border-green-500">
+      <Nav {posts} {path} client:only="solid-js" />
+      <div
+        class="p-8 border-red-500 z-0 mt-24 lg:mt-0 flex flex-col overflow-y-scroll w-full lg:w-1/2 scrollbar scrollbar-w-[8px] scrollbar-thumb-orange scrollbar-track-fg prose-pre:rounded-none prose-code:bg-fg prose-code:text-bg prose-code:rounded-sm prose-code:px-2"
+      >
+        <slot />
+      </div>
+      <div class="lg:w-1/6"></div>
+    </main>
+  </body>
 </html>

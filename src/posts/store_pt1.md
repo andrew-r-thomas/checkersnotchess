@@ -16,9 +16,6 @@ An important distinction to make at the start is that we're gonna be targeting O
 
 I also want to point out that this is a pretty general purpose system. Databases are already inherently general purpose, and we're making a *library* for a DB subsystem, so it has to be even more general purpose. This means for handling things like read heavy vs write heavy workloads, we want these to be tunable knobs as much as possible, rather than embedded in the underlying structure of the system. To be clear, there's absolutely a benefit to specializing, and databases will often be specialized somewhat to specific use cases, but at a certain point, it stops being a database and becomes "the system you built for your application to manage it's persistent data". Again, this is *not necessarily a bad idea*, but it's not a database.
 
-> <u><strong>A Brief Aside On Language Choice</strong></u><br>
-> I'm writing this in rust, **the main reason for this choice is that it's just the language I have the most experience with.** I'll just leave it at that.
-
 ## about that index structure
 Most key value stores like this will use either a traditional b-tree, or an lsm tree, as the main indexing structure. After what I just said about not optimizing specifically for read or write heavy workloads, you might think a b-tree is the obvious choice. After all, LSM trees are for write heavy workloads, right? Wellll, kinda. They definitely handle write heavy workloads better than anything else, but to me, that isn't the main reason to use one.
 
@@ -36,6 +33,10 @@ One downside though, is that LSM trees kind of go "all in" on this discrepancy, 
 Lucky for us, the fine folks over at Microsoft have built exactly what we're looking for. [This paper]() describes an index structure called a bw-tree. In a nutshell, it's a log structured b-tree. It also goes a step further by making the entire structure lock free, with the goal of enabling a very high degree of concurrent access. I won't go into a ton of detail right now, I mostly want to talk about the page structure, but here's a basic overview.
 
 The central index for accessing pages is called a mapping table. For now, just assume that there's a fixed number of pages in the system. If we say page ids are unsigned 64 bit integers, the mapping table is just an array indexed by page id. The *contents* of the array is the interesting part. Each slot in the mapping table contains an atomically accessed pointer to the head of a linked list, which is how pages are represented in memory. Basically, when we want to do a write, we encode it somehow as a "delta" of the current page state. So like, if we added a new key-value pair to a leaf page, the delta might look like:
+
+> <u><strong>A Brief Aside On Language Choice</strong></u><br>
+> I'm writing this in rust, **the main reason for this choice is that it's just the language I have the most experience with.** I'll just leave it at that.
+> Also, the code samples in this post are not fully fleshed out, they're just there for illustration purposes, and should be considered pseudocode.
 
 ```rust
 // this isn't correct syntax but you get the idea
