@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@font-face {
+	font-family: Work Sans;
+	src: url("/static/fonts/Work_Sans/WorkSans-VariableFont_wght.ttf") format("truetype");
+}
+
+@theme {
+	--font-sans: "Work Sans", sans-serif;
+}
