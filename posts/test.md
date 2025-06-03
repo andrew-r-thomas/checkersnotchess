@@ -1,3 +1,8 @@
+---
+title: Test
+description: this is just a test, chill
+---
+
 # this is a test md file
 
 this is some text with some *italics* and **bold**.

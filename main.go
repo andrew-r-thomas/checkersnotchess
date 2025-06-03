@@ -48,3 +48,9 @@ func post(respWriter http.ResponseWriter, req *http.Request) {
 		log.Fatal(err)
 	}
 }
+
+type Post struct {
+	Title string
+	Desc  string
+	Url   string
+}

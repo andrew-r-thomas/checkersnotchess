@@ -4,17 +4,23 @@
 @layer theme {
   :root, :host {
     --font-sans: "Work Sans", sans-serif;
-    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-      "Courier New", monospace;
-    --color-amber-500: oklch(76.9% 0.188 70.08);
+    --font-serif: "Spectral", serif;
+    --font-mono: "Jet Brains Mono", monospace;
     --spacing: 0.25rem;
-    --text-4xl: 2.25rem;
-    --text-4xl--line-height: calc(2.5 / 2.25);
+    --text-lg: 1.125rem;
+    --text-lg--line-height: calc(1.75 / 1.125);
+    --text-6xl: 3.75rem;
+    --text-6xl--line-height: 1;
+    --font-weight-semibold: 600;
     --font-weight-bold: 700;
     --default-transition-duration: 150ms;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
+    --color-bg: #eee8d5;
+    --color-fg: #073642;
+    --color-gold: #b58900;
+    --color-navy: #268bd2;
   }
 }
 @layer base {
@@ -187,6 +193,18 @@
   .table {
     display: table;
   }
+  .h-screen {
+    height: 100vh;
+  }
+  .w-1\/3 {
+    width: calc(1/3 * 100%);
+  }
+  .w-full {
+    width: 100%;
+  }
+  .w-screen {
+    width: 100vw;
+  }
   .grow {
     flex-grow: 1;
   }
@@ -199,11 +217,21 @@
   .flex-col {
     flex-direction: column;
   }
-  .space-y-4 {
+  .flex-row {
+    flex-direction: row;
+  }
+  .space-y-2 {
     :where(& > :not(:last-child)) {
       --tw-space-y-reverse: 0;
-      margin-block-start: calc(calc(var(--spacing) * 4) * var(--tw-space-y-reverse));
-      margin-block-end: calc(calc(var(--spacing) * 4) * calc(1 - var(--tw-space-y-reverse)));
+      margin-block-start: calc(calc(var(--spacing) * 2) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 2) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .space-y-8 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing) * 8) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 8) * calc(1 - var(--tw-space-y-reverse)));
     }
   }
   .truncate {
@@ -211,25 +239,72 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+  .border-r-4 {
+    border-right-style: var(--tw-border-style);
+    border-right-width: 4px;
+  }
+  .border-b-4 {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 4px;
+  }
+  .border-l-4 {
+    border-left-style: var(--tw-border-style);
+    border-left-width: 4px;
+  }
+  .border-fg {
+    border-color: var(--color-fg);
+  }
+  .bg-bg {
+    background-color: var(--color-bg);
+  }
+  .p-2 {
+    padding: calc(var(--spacing) * 2);
+  }
   .p-3 {
     padding: calc(var(--spacing) * 3);
+  }
+  .p-4 {
+    padding: calc(var(--spacing) * 4);
   }
   .p-5 {
     padding: calc(var(--spacing) * 5);
   }
+  .p-8 {
+    padding: calc(var(--spacing) * 8);
+  }
+  .font-mono {
+    font-family: var(--font-mono);
+  }
   .font-sans {
     font-family: var(--font-sans);
   }
-  .text-4xl {
-    font-size: var(--text-4xl);
-    line-height: var(--tw-leading, var(--text-4xl--line-height));
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+  .text-6xl {
+    font-size: var(--text-6xl);
+    line-height: var(--tw-leading, var(--text-6xl--line-height));
+  }
+  .text-lg {
+    font-size: var(--text-lg);
+    line-height: var(--tw-leading, var(--text-lg--line-height));
   }
   .font-bold {
     --tw-font-weight: var(--font-weight-bold);
     font-weight: var(--font-weight-bold);
   }
-  .text-amber-500 {
-    color: var(--color-amber-500);
+  .font-semibold {
+    --tw-font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-semibold);
+  }
+  .text-fg {
+    color: var(--color-fg);
+  }
+  .text-gold {
+    color: var(--color-gold);
+  }
+  .text-navy {
+    color: var(--color-navy);
   }
   .transition {
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, visibility, content-visibility, overlay, pointer-events;
@@ -239,7 +314,107 @@
 }
 @font-face {
   font-family: Work Sans;
+  font-style: normal;
   src: url("/static/fonts/Work_Sans/WorkSans-VariableFont_wght.ttf") format("truetype");
+}
+@font-face {
+  font-family: Work Sans;
+  font-style: italic;
+  src: url("/static/fonts/Work_Sans/WorkSans-Italic-VariableFont_wght.ttf") format("truetype");
+}
+@font-face {
+  font-family: Spectral;
+  font-weight: 200;
+  font-style: normal;
+  src: url("/static/fonts/Spectral/Spectral-ExtraLight.ttf") format("truetype");
+}
+@font-face {
+  font-family: Spectral;
+  font-weight: 300;
+  font-style: normal;
+  src: url("/static/fonts/Spectral/Spectral-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: Spectral;
+  font-weight: 400;
+  font-style: normal;
+  src: url("/static/fonts/Spectral/Spectral-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: Spectral;
+  font-weight: 500;
+  font-style: normal;
+  src: url("/static/fonts/Spectral/Spectral-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: Spectral;
+  font-weight: 600;
+  font-style: normal;
+  src: url("/static/fonts/Spectral/Spectral-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: Spectral;
+  font-weight: 700;
+  font-style: normal;
+  src: url("/static/fonts/Spectral/Spectral-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: Spectral;
+  font-weight: 800;
+  font-style: normal;
+  src: url("/static/fonts/Spectral/Spectral-ExtraBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: Spectral;
+  font-weight: 200;
+  font-style: italic;
+  src: url("/static/fonts/Spectral/Spectral-ExtraLightItalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: Spectral;
+  font-weight: 300;
+  font-style: italic;
+  src: url("/static/fonts/Spectral/Spectral-LightItalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: Spectral;
+  font-weight: 400;
+  font-style: italic;
+  src: url("/static/fonts/Spectral/Spectral-RegularItalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: Spectral;
+  font-weight: 500;
+  font-style: italic;
+  src: url("/static/fonts/Spectral/Spectral-MediumItalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: Spectral;
+  font-weight: 600;
+  font-style: italic;
+  src: url("/static/fonts/Spectral/Spectral-SemiBoldItalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: Spectral;
+  font-weight: 700;
+  font-style: italic;
+  src: url("/static/fonts/Spectral/Spectral-BoldItalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: Spectral;
+  font-weight: 800;
+  font-style: italic;
+  src: url("/static/fonts/Spectral/Spectral-ExtraBoldItalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: Jet Brains Mono;
+  font-style: normal;
+  src: url("/static/fonts/JetBrains_Mono/JetBrainsMono-VariableFont_wght.ttf") format("truetype");
+}
+@font-face {
+  font-family: Jet Brains Mono;
+  font-style: italic;
+  src: url("/static/fonts/JetBrains_Mono/JetBrainsMono-Italic-VariableFont_wght.ttf") format("truetype");
 }
 @property --tw-rotate-x {
   syntax: "*";
@@ -266,6 +441,11 @@
   inherits: false;
   initial-value: 0;
 }
+@property --tw-border-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
 @property --tw-font-weight {
   syntax: "*";
   inherits: false;
@@ -279,6 +459,7 @@
       --tw-skew-x: initial;
       --tw-skew-y: initial;
       --tw-space-y-reverse: 0;
+      --tw-border-style: solid;
       --tw-font-weight: initial;
     }
   }
