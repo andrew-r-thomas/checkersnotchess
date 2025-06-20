@@ -182,6 +182,9 @@
   .absolute {
     position: absolute;
   }
+  .fixed {
+    position: fixed;
+  }
   .static {
     position: static;
   }
@@ -372,19 +375,14 @@
       display: flex;
     }
   }
-  .lg\:w-1\/6 {
+  .lg\:w-2\/9 {
     @media (width >= 64rem) {
-      width: calc(1/6 * 100%);
+      width: calc(2/9 * 100%);
     }
   }
-  .lg\:w-2\/6 {
+  .lg\:w-5\/9 {
     @media (width >= 64rem) {
-      width: calc(2/6 * 100%);
-    }
-  }
-  .lg\:w-3\/6 {
-    @media (width >= 64rem) {
-      width: calc(3/6 * 100%);
+      width: calc(5/9 * 100%);
     }
   }
   .lg\:flex-row {
@@ -401,12 +399,6 @@
     @media (width >= 64rem) {
       border-right-style: var(--tw-border-style);
       border-right-width: 4px;
-    }
-  }
-  .lg\:border-l-4 {
-    @media (width >= 64rem) {
-      border-left-style: var(--tw-border-style);
-      border-left-width: 4px;
     }
   }
   .lg\:p-8 {
@@ -469,6 +461,31 @@
   .\[\&_p\]\:pb-8 {
     & p {
       padding-bottom: calc(var(--spacing) * 8);
+    }
+  }
+  .\[\&_pre\]\:mb-8 {
+    & pre {
+      margin-bottom: calc(var(--spacing) * 8);
+    }
+  }
+  .\[\&_pre\]\:overflow-x-scroll {
+    & pre {
+      overflow-x: scroll;
+    }
+  }
+  .\[\&_pre\]\:bg-fg {
+    & pre {
+      background-color: var(--color-fg);
+    }
+  }
+  .\[\&_pre\]\:p-4 {
+    & pre {
+      padding: calc(var(--spacing) * 4);
+    }
+  }
+  .\[\&_pre\]\:text-bg {
+    & pre {
+      color: var(--color-bg);
     }
   }
 }

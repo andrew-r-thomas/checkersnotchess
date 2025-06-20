@@ -10,7 +10,7 @@
 </head>
 
 <body class="font-sans bg-bg text-fg flex flex-col lg:flex-row h-screen w-screen overflow-y-scroll">
-	<div class="lg:border-r-4 border-fg lg:w-1/6">
+	<div class="lg:border-r-4 border-fg lg:w-2/9">
 		<div class="border-b-4 border-fg flex flex-col p-6 lg:p-8 space-y-8 h-min">
 			<a href="/" class="flex flex-col font-bold space-y-2">
 				<div class="text-4xl lg:text-6xl font-serif">
@@ -49,7 +49,7 @@
 			</ol>
 		</nav>
 	</div>
-	<main class="flex flex-col space-y-12 p-8 lg:p-10 lg:overflow-y-scroll lg:w-3/6">
+	<main class="flex flex-col space-y-12 p-8 lg:p-10 lg:overflow-y-scroll lg:w-5/9 lg:border-r-4 border-fg">
 		<div class="flex flex-col space-y-4">
 			<h1 class="text-6xl font-bold font-serif">{{ .Title }}</h1>
 			{{ if ne .Desc "" }}
@@ -57,11 +57,10 @@
 			{{ end }}
 		</div>
 		<article
-			class="[&_h2]:text-2xl [&_h2]:font-bold [&_h2]:font-serif [&_h2]:pb-2 [&_p]:pb-8 [&_a]:text-navy [&_a]:underline [&_a]:hover:text-gold">
+			class="[&_h2]:text-2xl [&_h2]:font-bold [&_h2]:font-serif [&_h2]:pb-2 [&_p]:pb-8 [&_pre]:mb-8 [&_pre]:p-4 [&_pre]:bg-fg [&_pre]:text-bg [&_pre]:overflow-x-scroll [&_a]:text-navy [&_a]:underline [&_a]:hover:text-gold">
 			{{.Content}}
 		</article>
 	</main>
-	<div class="lg:w-2/6 lg:border-l-4 border-fg"></div>
 </body>
 
 </html>
